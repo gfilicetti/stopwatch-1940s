@@ -1,0 +1,1017 @@
+/* ==========================================================================
+   1944 Chronographe Rattrapante — Design System & Styles
+   Pure Vanilla CSS • 1940s Watchmaker Workbench, Nickel-Chrome Case & Ledger
+   ========================================================================== */
+
+:root {
+  /* Workbench & Ambient Palette */
+  --wood-deep: #110d0a;
+  --wood-mid: #1f1711;
+  --wood-warm: #2c2017;
+  --lamp-glow: rgba(235, 190, 118, 0.11);
+
+  /* Aged Enamel, Brass & Ink */
+  --enamel-ivory: #f4ebd9;
+  --enamel-aged: #e5d5b5;
+  --paper-manila: #f3ead6;
+  --paper-shadow: #dfd1b4;
+  --paper-rule: rgba(94, 118, 138, 0.24);
+  --paper-margin: rgba(168, 45, 36, 0.38);
+
+  --ink-charcoal: #1e1a16;
+  --ink-faded: #5a5043;
+  --ink-crimson: #9e231b;
+  --ink-forest: #1f5c3a;
+
+  /* Metals */
+  --brass-bright: #e5c170;
+  --brass-mid: #b58938;
+  --brass-dark: #634614;
+
+  /* Bakelite Switchgear */
+  --bakelite-black: #231f1d;
+  --bakelite-oxblood: #631d19;
+  --bakelite-amber: #7c4b18;
+  --bakelite-olive: #2b3a2c;
+
+  /* Typography */
+  --font-display: 'Playfair Display', 'Didot', 'Bodoni MT', Georgia, serif;
+  --font-serif: 'EB Garamond', Garamond, 'Times New Roman', serif;
+  --font-mono: 'Courier Prime', 'Courier New', Courier, monospace;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  background-color: var(--wood-deep);
+  color: var(--enamel-ivory);
+  font-family: var(--font-serif);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Warm 1940s Watchmaker Desk Surface */
+.desk-surface {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem 1.5rem 2.5rem;
+  background:
+    radial-gradient(ellipse 80% 60% at 35% 32%, var(--lamp-glow), transparent 70%),
+    radial-gradient(circle at 50% 45%, var(--wood-warm) 0%, var(--wood-mid) 52%, var(--wood-deep) 100%);
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Riveted Brass Instrument Nameplate Header */
+.app-header {
+  width: 100%;
+  max-width: 1120px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.header-plate {
+  display: inline-flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 0.55rem 1.4rem;
+  background: linear-gradient(180deg, #322618 0%, #1d150d 100%);
+  border: 1px solid #6f5324;
+  border-radius: 4px;
+  box-shadow:
+    0 6px 18px rgba(0, 0, 0, 0.65),
+    inset 0 1px 0 rgba(242, 211, 142, 0.25),
+    inset 0 0 0 2px #16100a;
+}
+
+.plate-screw {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, var(--brass-bright), var(--brass-dark));
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.8), inset 0 0 1px #2a1d06;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.plate-screw::after {
+  content: '';
+  position: absolute;
+  top: 4px;
+  left: 1px;
+  right: 1px;
+  height: 1.5px;
+  background: #3d2a09;
+  transform: rotate(-32deg);
+}
+
+.plate-screw--right::after {
+  transform: rotate(48deg);
+}
+
+.plate-text {
+  text-align: center;
+}
+
+.eyebrow {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  color: var(--brass-bright);
+  opacity: 0.85;
+}
+
+.app-header h1 {
+  margin: 0.1rem 0 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.15rem, 2.2vw, 1.5rem);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--enamel-ivory);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+/* Main Two-Column Workbench Layout */
+.workbench {
+  width: 100%;
+  max-width: 1120px;
+  display: grid;
+  grid-template-columns: minmax(320px, 520px) minmax(320px, 480px);
+  gap: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  margin: auto 0;
+}
+
+/* ==========================================================================
+   Pocket Stopwatch Assembly
+   ========================================================================== */
+.watch-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.6rem;
+}
+
+.pocket-watch {
+  position: relative;
+  width: min(86vw, 430px);
+  aspect-ratio: 1 / 1;
+  padding-top: 58px;
+  box-sizing: content-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+}
+
+/* Hinged Metallic Bow Loop at 12 o'clock */
+.watch-bow {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 96px;
+  height: 76px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.bow-ring {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 9px solid #b8bcc2;
+  box-shadow:
+    0 6px 12px rgba(0, 0, 0, 0.65),
+    inset 0 2px 3px rgba(255, 255, 255, 0.75),
+    inset 0 -3px 5px rgba(28, 30, 34, 0.8),
+    0 0 0 1px #4b4f56;
+  background: transparent;
+}
+
+.bow-collar {
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 34px;
+  height: 18px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #5d626a 0%, #eef1f5 32%, #9da3ad 62%, #454950 100%);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.6);
+}
+
+/* Interactive Physical Watch Pushers & Crown */
+.watch-pusher {
+  appearance: none;
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  position: absolute;
+  z-index: 3;
+  outline: none;
+}
+
+.watch-pusher:disabled {
+  cursor: not-allowed;
+  filter: brightness(0.86);
+}
+
+.watch-pusher:focus-visible {
+  filter: drop-shadow(0 0 6px var(--brass-bright));
+}
+
+/* Top Crown (Start / Stop) */
+.watch-crown {
+  top: 17px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 48px;
+  height: 44px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.09s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.watch-crown:hover:not(:disabled) {
+  transform: translateX(-50%) translateY(1.5px);
+}
+
+.watch-crown:active:not(:disabled),
+.watch-crown.is-pressed {
+  transform: translateX(-50%) translateY(6px);
+}
+
+.crown-knurling {
+  width: 44px;
+  height: 22px;
+  border-radius: 7px 7px 4px 4px;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      rgba(25, 28, 33, 0.58) 0px,
+      rgba(25, 28, 33, 0.58) 2px,
+      rgba(245, 247, 250, 0.72) 2px,
+      rgba(245, 247, 250, 0.72) 4px,
+      rgba(130, 136, 145, 0.5) 4px,
+      rgba(130, 136, 145, 0.5) 5px
+    ),
+    linear-gradient(90deg, #525760, #e5e9ef 35%, #9ca2ac 70%, #3d4148);
+  border: 1px solid #3c4047;
+  box-shadow:
+    0 3px 6px rgba(0, 0, 0, 0.55),
+    inset 0 2px 2px rgba(255, 255, 255, 0.65);
+}
+
+.crown-stem {
+  width: 20px;
+  height: 20px;
+  background: linear-gradient(90deg, #4b5058 0%, #dfe4ec 38%, #888f99 72%, #393d44 100%);
+  border-left: 1px solid #353940;
+  border-right: 1px solid #353940;
+}
+
+/* Side Pushers (Left = Split/Lap at -38deg, Right = Reset at +38deg) */
+.watch-side-pusher {
+  width: 32px;
+  height: 36px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  top: 90px;
+  transition: transform 0.09s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.watch-side-pusher--left {
+  left: 34px;
+  transform: rotate(-40deg);
+}
+
+.watch-side-pusher--left:hover:not(:disabled) {
+  transform: rotate(-40deg) translateY(1.5px);
+}
+
+.watch-side-pusher--left:active:not(:disabled),
+.watch-side-pusher--left.is-pressed {
+  transform: rotate(-40deg) translateY(6px);
+}
+
+.watch-side-pusher--right {
+  right: 34px;
+  transform: rotate(40deg);
+}
+
+.watch-side-pusher--right:hover:not(:disabled) {
+  transform: rotate(40deg) translateY(1.5px);
+}
+
+.watch-side-pusher--right:active:not(:disabled),
+.watch-side-pusher--right.is-pressed {
+  transform: rotate(40deg) translateY(6px);
+}
+
+.pusher-cap {
+  width: 26px;
+  height: 13px;
+  border-radius: 6px 6px 2px 2px;
+  background: linear-gradient(90deg, #525760 0%, #f1f4f8 36%, #9da4af 68%, #41454c 100%);
+  border: 1px solid #373b42;
+  box-shadow: inset 0 2px 2px rgba(255, 255, 255, 0.8), 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+/* Subtle crimson lacquer ring on the Rattrapante left pusher */
+.watch-side-pusher--left .pusher-cap {
+  border-bottom: 2.5px solid #9c221b;
+}
+
+.pusher-collar {
+  width: 15px;
+  height: 20px;
+  background: linear-gradient(90deg, #474b52 0%, #d8dde6 40%, #7d838d 75%, #34373d 100%);
+}
+
+/* Engraved Desk Callout Labels Around Pushers */
+.pusher-hint {
+  position: absolute;
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.16em;
+  color: rgba(232, 207, 158, 0.56);
+  pointer-events: none;
+}
+
+.pusher-hint--top {
+  top: -16px;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+}
+
+.pusher-hint--left {
+  top: 72px;
+  left: -4px;
+  transform: rotate(-38deg);
+}
+
+.pusher-hint--right {
+  top: 72px;
+  right: -6px;
+  transform: rotate(38deg);
+}
+
+/* Brushed & Polished Nickel-Chrome Pocket Case */
+.watch-case {
+  position: relative;
+  z-index: 4;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  padding: 15px;
+  background: conic-gradient(
+    from 215deg at 50% 50%,
+    #636870 0deg,
+    #eef2f6 38deg,
+    #9ca3ad 78deg,
+    #494d54 125deg,
+    #d6dce4 175deg,
+    #7b828c 220deg,
+    #f5f7fa 268deg,
+    #858c96 315deg,
+    #636870 360deg
+  );
+  box-shadow:
+    0 28px 55px rgba(0, 0, 0, 0.82),
+    0 8px 18px rgba(0, 0, 0, 0.65),
+    inset 0 2px 4px rgba(255, 255, 255, 0.85),
+    inset 0 -4px 8px rgba(24, 26, 30, 0.85),
+    0 0 0 1.5px #2e3136;
+}
+
+/* Stepped Inner Bezel */
+.watch-bezel {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  padding: 9px;
+  background: conic-gradient(
+    from 35deg at 50% 50%,
+    #4f545c 0deg,
+    #d9dfe7 52deg,
+    #777e88 110deg,
+    #eff3f7 168deg,
+    #575c64 235deg,
+    #cfd5de 300deg,
+    #4f545c 360deg
+  );
+  box-shadow:
+    inset 0 3px 6px rgba(20, 22, 26, 0.72),
+    0 1px 2px rgba(255, 255, 255, 0.55);
+}
+
+/* Warm Brass / Aged Steel Inner Rehaut Ring */
+.watch-rehaut {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  padding: 5px;
+  background: linear-gradient(145deg, #5e5037 0%, #c8b388 48%, #4a3e29 100%);
+  box-shadow: inset 0 4px 12px rgba(18, 13, 7, 0.85);
+}
+
+.dial-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: inset 0 0 18px rgba(38, 27, 12, 0.52);
+}
+
+.stopwatch-svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Domed Acrylic (Hesalite) Crystal Reflection */
+.crystal-dome {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      ellipse 68% 42% at 34% 22%,
+      rgba(255, 252, 244, 0.27) 0%,
+      rgba(255, 252, 244, 0.08) 48%,
+      transparent 72%
+    ),
+    radial-gradient(
+      circle at 50% 50%,
+      transparent 78%,
+      rgba(28, 20, 10, 0.28) 95%,
+      rgba(15, 11, 6, 0.55) 100%
+    );
+}
+
+/* ==========================================================================
+   SVG Dial Typography
+   ========================================================================== */
+.dial-numeral {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 21px;
+  fill: var(--ink-charcoal);
+  dominant-baseline: central;
+}
+
+.dial-numeral--red {
+  fill: var(--ink-crimson);
+}
+
+.dial-outer-fifth {
+  font-family: var(--font-mono);
+  font-size: 8.5px;
+  font-weight: 700;
+  fill: var(--ink-crimson);
+  dominant-baseline: central;
+}
+
+.subdial-numeral {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 11.5px;
+  fill: var(--ink-charcoal);
+  dominant-baseline: central;
+}
+
+.subdial-numeral--red {
+  fill: var(--ink-crimson);
+}
+
+.dial-brand {
+  font-family: var(--font-display);
+  font-size: 12.5px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  fill: var(--ink-charcoal);
+}
+
+.dial-brand-sub {
+  font-family: var(--font-display);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  fill: var(--ink-crimson);
+}
+
+.dial-caption {
+  font-family: var(--font-serif);
+  font-size: 9px;
+  font-style: italic;
+  letter-spacing: 0.08em;
+  fill: #3d3429;
+}
+
+.dial-caption-sm {
+  font-family: var(--font-mono);
+  font-size: 6.8px;
+  letter-spacing: 0.12em;
+  fill: #594c3b;
+}
+
+.dial-sub-label {
+  font-family: var(--font-mono);
+  font-size: 6.8px;
+  letter-spacing: 0.16em;
+  fill: #4f4334;
+}
+
+.dial-swiss {
+  font-family: var(--font-mono);
+  font-size: 7px;
+  letter-spacing: 0.18em;
+  fill: #594c3b;
+}
+
+/* ==========================================================================
+   Tactile 1940s Bakelite Control Console
+   ========================================================================== */
+.control-plinth {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.65rem;
+  width: 100%;
+  max-width: 470px;
+  padding: 0.75rem;
+  background: linear-gradient(180deg, #271e16 0%, #17110c 100%);
+  border: 1px solid #4e3b22;
+  border-radius: 8px;
+  box-shadow:
+    0 12px 26px rgba(0, 0, 0, 0.65),
+    inset 0 1px 0 rgba(235, 200, 132, 0.18);
+}
+
+.bakelite-btn {
+  appearance: none;
+  border: 1px solid #120d0a;
+  border-radius: 5px;
+  padding: 0 0 4px 0;
+  background: #0e0a08;
+  cursor: pointer;
+  transition: transform 0.08s ease, filter 0.15s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+}
+
+.bakelite-btn .btn-cap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2rem;
+  min-height: 52px;
+  padding: 0.45rem 0.35rem;
+  border-radius: 4px;
+  border-top: 1px solid rgba(255, 255, 255, 0.22);
+  transition: transform 0.08s ease;
+}
+
+.bakelite-btn--primary .btn-cap {
+  background: linear-gradient(180deg, #354936 0%, var(--bakelite-olive) 100%);
+}
+
+.bakelite-btn--primary[data-running="true"] .btn-cap {
+  background: linear-gradient(180deg, #822823 0%, var(--bakelite-oxblood) 100%);
+}
+
+.bakelite-btn--amber .btn-cap {
+  background: linear-gradient(180deg, #985d21 0%, var(--bakelite-amber) 100%);
+}
+
+.bakelite-btn--dark .btn-cap {
+  background: linear-gradient(180deg, #342e2b 0%, var(--bakelite-black) 100%);
+}
+
+.bakelite-btn--toggle .btn-cap {
+  background: linear-gradient(180deg, #2f2925 0%, #1e1a17 100%);
+  position: relative;
+}
+
+.bakelite-btn:hover:not(:disabled) {
+  filter: brightness(1.1);
+}
+
+.bakelite-btn:active:not(:disabled),
+.bakelite-btn.is-pressed:not(:disabled) {
+  padding-bottom: 1px;
+  transform: translateY(3px);
+}
+
+.bakelite-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.44;
+}
+
+.bakelite-btn:focus-visible {
+  outline: 2px solid var(--brass-bright);
+  outline-offset: 2px;
+}
+
+.btn-label {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  color: var(--enamel-ivory);
+}
+
+.btn-shortcut {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.12em;
+  color: rgba(244, 235, 217, 0.58);
+}
+
+/* Jewel Pilot Lamp on Ticks Toggle */
+.btn-led {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #473c33;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.8);
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.bakelite-btn--toggle[aria-pressed="true"] .btn-led {
+  background: #e5a93c;
+  box-shadow: 0 0 6px rgba(229, 169, 60, 0.85);
+}
+
+/* ==========================================================================
+   1940s Timekeeper's Clipboard & Manila Timing Ledger
+   ========================================================================== */
+.ledger-stage {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.clipboard {
+  position: relative;
+  width: 100%;
+  max-width: 460px;
+  padding: 18px 14px 14px;
+  background: linear-gradient(160deg, #3c2818 0%, #26180e 100%);
+  border: 1px solid #573b22;
+  border-radius: 10px;
+  box-shadow:
+    0 24px 48px rgba(0, 0, 0, 0.78),
+    inset 0 1px 1px rgba(255, 219, 168, 0.16);
+}
+
+/* Metallic Clipboard Spring Clip */
+.clipboard-clip {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 132px;
+  height: 28px;
+  border-radius: 5px 5px 3px 3px;
+  background: linear-gradient(180deg, #d7dce2 0%, #8b929c 55%, #555a62 100%);
+  border: 1px solid #383c42;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.55);
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.clip-lever {
+  width: 48px;
+  height: 10px;
+  border-radius: 3px;
+  background: linear-gradient(180deg, #52575f 0%, #b5bcc6 100%);
+  border: 1px solid #353940;
+}
+
+/* Manila Paper Sheet */
+.ledger-sheet {
+  position: relative;
+  background-color: var(--paper-manila);
+  background-image:
+    linear-gradient(90deg, transparent 42px, var(--paper-margin) 42px, var(--paper-margin) 43.5px, transparent 43.5px),
+    repeating-linear-gradient(
+      180deg,
+      transparent 0px,
+      transparent 29px,
+      var(--paper-rule) 29px,
+      var(--paper-rule) 30px
+    );
+  color: var(--ink-charcoal);
+  border-radius: 3px;
+  padding: 1.5rem 1.35rem 1.1rem;
+  box-shadow:
+    0 3px 10px rgba(0, 0, 0, 0.45),
+    inset 0 0 28px rgba(156, 128, 80, 0.22);
+  display: flex;
+  flex-direction: column;
+  min-height: 500px;
+}
+
+.ledger-header {
+  border-bottom: 2px double #4a4033;
+  padding-bottom: 0.9rem;
+}
+
+.ledger-title-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.ledger-form-id {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  color: var(--ink-faded);
+}
+
+.ledger-heading {
+  margin: 0.15rem 0 0;
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: var(--ink-charcoal);
+}
+
+/* Rubber Ink Stamp Badge */
+.status-stamp {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  padding: 0.22rem 0.55rem;
+  border: 1.5px solid var(--ink-faded);
+  border-radius: 2px;
+  color: var(--ink-faded);
+  transform: rotate(-2.5deg);
+  text-transform: uppercase;
+  white-space: nowrap;
+  background: rgba(243, 234, 214, 0.72);
+}
+
+.status-stamp[data-state="running"] {
+  border-color: var(--ink-forest);
+  color: var(--ink-forest);
+}
+
+.status-stamp[data-state="paused"] {
+  border-color: var(--ink-crimson);
+  color: var(--ink-crimson);
+}
+
+/* Typewriter Secondary Readout */
+.readout-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-top: 0.9rem;
+}
+
+.readout-cell {
+  background: rgba(223, 209, 180, 0.58);
+  border: 1px solid #bfb091;
+  border-radius: 3px;
+  padding: 0.5rem 0.7rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.readout-caption {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  color: var(--ink-faded);
+}
+
+.readout-value {
+  font-family: var(--font-mono);
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--ink-charcoal);
+  margin-top: 0.15rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.readout-value--crimson {
+  color: var(--ink-crimson);
+}
+
+/* Rattrapante Status Note */
+.rattrapante-note {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.15rem;
+  border-bottom: 1px solid #bfb091;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--ink-faded);
+}
+
+.legend-swatch {
+  width: 12px;
+  height: 3px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.legend-swatch--crimson {
+  background-color: var(--ink-crimson);
+}
+
+/* Scrollable Lap Table */
+.ledger-table-wrap {
+  flex: 1;
+  max-height: 290px;
+  overflow-y: auto;
+  margin-top: 0.25rem;
+  scrollbar-width: thin;
+  scrollbar-color: #9e8d6f transparent;
+}
+
+.ledger-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-mono);
+  font-size: 0.84rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.ledger-table thead th {
+  position: sticky;
+  top: 0;
+  background: var(--paper-shadow);
+  color: var(--ink-charcoal);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.11em;
+  text-align: left;
+  padding: 0.45rem 0.4rem;
+  border-bottom: 1.5px solid #8a7b61;
+  z-index: 1;
+}
+
+.ledger-table thead th:last-child,
+.ledger-table tbody td:last-child {
+  text-align: right;
+}
+
+.ledger-table tbody tr {
+  border-bottom: 1px dashed rgba(90, 80, 67, 0.28);
+  animation: stampRow 0.18s ease-out;
+}
+
+@keyframes stampRow {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ledger-table tbody td {
+  padding: 0.48rem 0.4rem;
+  color: var(--ink-charcoal);
+}
+
+.lap-num-cell {
+  font-weight: 700;
+  color: var(--ink-faded);
+}
+
+.lap-split-cell {
+  font-weight: 700;
+}
+
+.empty-ledger-row td {
+  padding: 2.4rem 0.75rem !important;
+  text-align: center !important;
+  color: var(--ink-faded) !important;
+  font-style: italic;
+  line-height: 1.5;
+}
+
+/* Fastest / Slowest Ink Marks */
+.lap-badge {
+  display: inline-block;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  padding: 0.1rem 0.36rem;
+  border-radius: 2px;
+  border: 1px solid currentColor;
+}
+
+.lap-badge--fastest {
+  color: var(--ink-forest);
+  background: rgba(31, 92, 58, 0.08);
+}
+
+.lap-badge--slowest {
+  color: var(--ink-crimson);
+  background: rgba(158, 35, 27, 0.08);
+}
+
+/* Ledger Footer */
+.ledger-footer {
+  margin-top: auto;
+  padding-top: 0.75rem;
+  border-top: 1.5px solid #9e8d6f;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.09em;
+  color: var(--ink-faded);
+}
+
+.ephemeral-stamp {
+  color: var(--ink-crimson);
+  opacity: 0.85;
+}
+
+/* ==========================================================================
+   Responsive Adaptations
+   ========================================================================== */
+@media (max-width: 960px) {
+  .workbench {
+    grid-template-columns: 1fr;
+    gap: 2.2rem;
+  }
+
+  .ledger-sheet {
+    min-height: 380px;
+  }
+}
+
+@media (max-width: 480px) {
+  .desk-surface {
+    padding: 1rem 0.75rem 2rem;
+  }
+
+  .pocket-watch {
+    width: min(90vw, 350px);
+    padding-top: 52px;
+  }
+
+  .watch-side-pusher {
+    top: 78px;
+  }
+
+  .watch-side-pusher--left {
+    left: 24px;
+  }
+
+  .watch-side-pusher--right {
+    right: 24px;
+  }
+
+  .pusher-hint--left,
+  .pusher-hint--right {
+    display: none;
+  }
+
+  .control-plinth {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .readout-value {
+    font-size: 1.15rem;
+  }
+}

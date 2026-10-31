@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>1944 Chronographe Rattrapante — Vintage Analog Stopwatch</title>
+  <meta
+    name="description"
+    content="An authentic 1940s Swiss-style mechanical analog pocket stopwatch (rattrapante) with split-second lap timing and timekeeper's ledger."
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=EB+Garamond:ital,wght@0,500;0,700;1,500&family=Playfair+Display:wght@600;700;800&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="desk-surface">
+    <header class="app-header">
+      <div class="header-plate">
+        <span class="plate-screw plate-screw--left" aria-hidden="true"></span>
+        <div class="plate-text">
+          <p class="eyebrow">GENÈVE • CAL. 19-44 • 17 JEWELS</p>
+          <h1>Chronographe Rattrapante</h1>
+        </div>
+        <span class="plate-screw plate-screw--right" aria-hidden="true"></span>
+      </div>
+    </header>
+
+    <main class="workbench">
+      <!-- Left Column: 1940s Analog Pocket Stopwatch -->
+      <section class="watch-stage" aria-label="1940s Analog Pocket Stopwatch">
+        <div class="pocket-watch" id="pocket-watch">
+          <!-- Hinged Pocket Watch Bow Ring -->
+          <div class="watch-bow" aria-hidden="true">
+            <div class="bow-ring"></div>
+            <div class="bow-collar"></div>
+          </div>
+
+          <!-- Top Winding / Start-Stop Crown (12 o'clock) -->
+          <button
+            type="button"
+            id="crown-btn"
+            class="watch-pusher watch-crown"
+            aria-label="Crown: Start or Pause Stopwatch"
+            title="Start / Stop (Space)"
+          >
+            <span class="crown-knurling"></span>
+            <span class="crown-stem"></span>
+          </button>
+
+          <!-- Left Rattrapante Split/Lap Pusher (~10:30) -->
+          <button
+            type="button"
+            id="pusher-lap"
+            class="watch-pusher watch-side-pusher watch-side-pusher--left"
+            aria-label="Left Pusher: Record Lap Split"
+            title="Lap / Split (L)"
+            disabled
+          >
+            <span class="pusher-cap"></span>
+            <span class="pusher-collar"></span>
+          </button>
+
+          <!-- Right Flyback Reset Pusher (~1:30) -->
+          <button
+            type="button"
+            id="pusher-reset"
+            class="watch-pusher watch-side-pusher watch-side-pusher--right"
+            aria-label="Right Pusher: Reset Stopwatch"
+            title="Reset to Zero (R)"
+            disabled
+          >
+            <span class="pusher-cap"></span>
+            <span class="pusher-collar"></span>
+          </button>
+
+          <!-- Pusher Callout Labels -->
+          <span class="pusher-hint pusher-hint--left" aria-hidden="true">SPLIT</span>
+          <span class="pusher-hint pusher-hint--top" aria-hidden="true">START · STOP</span>
+          <span class="pusher-hint pusher-hint--right" aria-hidden="true">RESET</span>
+
+          <!-- Metallic Outer Case & Bezel -->
+          <div class="watch-case">
+            <div class="watch-bezel">
+              <div class="watch-rehaut">
+                <!-- Dial Face SVG -->
+                <div class="dial-container">
+                  <svg
+                    id="stopwatch-svg"
+                    class="stopwatch-svg"
+                    viewBox="0 0 500 500"
+                    role="img"
+                    aria-label="Analog stopwatch dial with 60-second sweep hand, crimson rattrapante lap hand, 30-minute register, and 12-hour register"
+                  >
+                    <defs>
+                      <!-- Enamel Parchment Dial Gradient -->
+                      <radialGradient id="enamelDial" cx="50%" cy="46%" r="54%">
+                        <stop offset="0%" stop-color="#f8f1e1" />
+                        <stop offset="68%" stop-color="#efe3c8" />
+                        <stop offset="92%" stop-color="#dfd0ae" />
+                        <stop offset="100%" stop-color="#c8b690" />
+                      </radialGradient>
+
+                      <!-- Sunken Subdial Gradient -->
+                      <radialGradient id="subdialSurface" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" stop-color="#ece0c5" />
+                        <stop offset="85%" stop-color="#e3d3b2" />
+                        <stop offset="96%" stop-color="#cbb892" />
+                        <stop offset="100%" stop-color="#b5a17b" />
+                      </radialGradient>
+
+                      <!-- Subtle Paper / Aged Enamel Grain -->
+                      <filter id="enamelGrain" x="0%" y="0%" width="100%" height="100%">
+                        <feTurbulence
+                          type="fractalNoise"
+                          baseFrequency="0.85"
+                          numOctaves="3"
+                          stitchTiles="stitch"
+                          result="noise"
+                        />
+                        <feColorMatrix
+                          type="matrix"
+                          values="0 0 0 0 0.35
+                                  0 0 0 0 0.28
+                                  0 0 0 0 0.18
+                                  0 0 0 0.045 0"
+                          in="noise"
+                          result="coloredNoise"
+                        />
+                        <feComposite operator="in" in2="SourceGraphic" />
+                      </filter>
+
+                      <!-- Hand Drop Shadow -->
+                      <filter id="handShadow" x="-30%" y="-30%" width="160%" height="160%">
+                        <feDropShadow dx="1.5" dy="3" stdDeviation="2" flood-color="#1c160f" flood-opacity="0.38" />
+                      </filter>
+
+                      <filter id="subHandShadow" x="-40%" y="-40%" width="180%" height="180%">
+                        <feDropShadow dx="0.8" dy="1.6" stdDeviation="1" flood-color="#1c160f" flood-opacity="0.34" />
+                      </filter>
+
+                      <!-- Brass Pinion Gradient -->
+                      <radialGradient id="brassCap" cx="35%" cy="35%" r="65%">
+                        <stop offset="0%" stop-color="#f7e3a1" />
+                        <stop offset="45%" stop-color="#c99e44" />
+                        <stop offset="85%" stop-color="#8a651e" />
+                        <stop offset="100%" stop-color="#593f0e" />
+                      </radialGradient>
+
+                      <!-- Blued Steel Gradient -->
+                      <linearGradient id="bluedSteel" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="#0f2342" />
+                        <stop offset="48%" stop-color="#224b82" />
+                        <stop offset="55%" stop-color="#3568ab" />
+                        <stop offset="100%" stop-color="#0c1b33" />
+                      </linearGradient>
+
+                      <!-- Crimson Rattrapante Gradient -->
+                      <linearGradient id="crimsonSteel" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="#6e1612" />
+                        <stop offset="50%" stop-color="#b82921" />
+                        <stop offset="100%" stop-color="#5c110e" />
+                      </linearGradient>
+                    </defs>
+
+                    <!-- Base Enamel Dial -->
+                    <circle cx="250" cy="250" r="236" fill="url(#enamelDial)" />
+                    <circle cx="250" cy="250" r="236" fill="url(#enamelDial)" filter="url(#enamelGrain)" />
+
+                    <!-- Outer 1/5th Second Telemetry & Railroad Track (Generated by dial.js) -->
+                    <g id="main-dial-ticks"></g>
+                    <g id="main-dial-numerals"></g>
+
+                    <!-- 12 o'clock 30-Minute Sub-dial (cy = 152) -->
+                    <g id="subdial-minutes" transform="translate(250, 152)">
+                      <circle cx="0" cy="0" r="58" fill="url(#subdialSurface)" stroke="#9e8b66" stroke-width="1.2" />
+                      <circle cx="0" cy="0" r="46" fill="none" stroke="#d5c4a1" stroke-width="0.6" opacity="0.7" />
+                      <circle cx="0" cy="0" r="34" fill="none" stroke="#d5c4a1" stroke-width="0.6" opacity="0.6" />
+                      <g id="subdial-minutes-ticks"></g>
+                      <text x="0" y="25" text-anchor="middle" class="dial-sub-label">MINUTES</text>
+                    </g>
+
+                    <!-- 6 o'clock 12-Hour Sub-dial (cy = 348) -->
+                    <g id="subdial-hours" transform="translate(250, 348)">
+                      <circle cx="0" cy="0" r="54" fill="url(#subdialSurface)" stroke="#9e8b66" stroke-width="1.2" />
+                      <circle cx="0" cy="0" r="42" fill="none" stroke="#d5c4a1" stroke-width="0.6" opacity="0.7" />
+                      <circle cx="0" cy="0" r="30" fill="none" stroke="#d5c4a1" stroke-width="0.6" opacity="0.6" />
+                      <g id="subdial-hours-ticks"></g>
+                      <text x="0" y="23" text-anchor="middle" class="dial-sub-label">HEURES</text>
+                    </g>
+
+                    <!-- Vintage 1940s Dial Typography -->
+                    <g class="dial-inscriptions" aria-hidden="true">
+                      <text x="152" y="244" text-anchor="middle" class="dial-brand">HELVETIA</text>
+                      <text x="152" y="258" text-anchor="middle" class="dial-caption">17 RUBIS</text>
+                      <text x="152" y="270" text-anchor="middle" class="dial-caption-sm">ANTIMAGNÉTIQUE</text>
+
+                      <text x="348" y="244" text-anchor="middle" class="dial-brand-sub">RATTRAPANTE</text>
+                      <text x="348" y="258" text-anchor="middle" class="dial-caption">1/5 SECONDE</text>
+                      <text x="348" y="270" text-anchor="middle" class="dial-caption-sm">GENÈVE • 1944</text>
+
+                      <path id="swiss-arc" d="M 210 476 A 230 230 0 0 0 290 476" fill="none" />
+                      <text class="dial-swiss">
+                        <textPath href="#swiss-arc" startOffset="50%" text-anchor="middle">FAB. SUISSE</textPath>
+                      </text>
+                    </g>
+
+                    <!-- Sub-dial Hands -->
+                    <g id="hand-minutes-group" transform="translate(250, 152)" filter="url(#subHandShadow)">
+                      <g id="hand-minutes">
+                        <path d="M 0 11 L -2.6 0 L -1.1 -40 L 0 -46 L 1.1 -40 L 2.6 0 Z" fill="url(#bluedSteel)" />
+                        <circle cx="0" cy="0" r="4.5" fill="url(#brassCap)" />
+                        <circle cx="0" cy="0" r="1.4" fill="#2c1d07" />
+                      </g>
+                    </g>
+
+                    <g id="hand-hours-group" transform="translate(250, 348)" filter="url(#subHandShadow)">
+                      <g id="hand-hours">
+                        <path d="M 0 10 L -2.8 0 L -1.2 -34 L 0 -40 L 1.2 -34 L 2.8 0 Z" fill="url(#bluedSteel)" />
+                        <circle cx="0" cy="0" r="4.2" fill="url(#brassCap)" />
+                        <circle cx="0" cy="0" r="1.3" fill="#2c1d07" />
+                      </g>
+                    </g>
+
+                    <!-- Center Hands Assembly -->
+                    <g transform="translate(250, 250)" filter="url(#handShadow)">
+                      <!-- Crimson Rattrapante (Split / Lap) Hand (Underneath main sweep hand) -->
+                      <g id="hand-lap">
+                        <!-- Counterweight diamond tail -->
+                        <path d="M 0 54 L -3.5 38 L 0 30 L 3.5 38 Z" fill="url(#crimsonSteel)" />
+                        <path d="M -1.5 34 L -1.9 0 L -0.7 -198 L 0 -208 L 0.7 -198 L 1.9 0 L 1.5 34 Z" fill="url(#crimsonSteel)" />
+                        <circle cx="0" cy="0" r="7.2" fill="url(#crimsonSteel)" />
+                      </g>
+
+                      <!-- Blued-Steel Main Sweep Hand (Breguet pomme style) -->
+                      <g id="hand-seconds">
+                        <!-- Counterbalance pear/crescent -->
+                        <circle cx="0" cy="48" r="5" fill="none" stroke="url(#bluedSteel)" stroke-width="2.4" />
+                        <path d="M -1.6 43 L -2.3 0 L -1.2 -136 L 1.2 -136 L 2.3 0 L 1.6 43 Z" fill="url(#bluedSteel)" />
+                        <!-- Classic Breguet open moon tip -->
+                        <circle cx="0" cy="-145" r="7.5" fill="none" stroke="url(#bluedSteel)" stroke-width="2.6" />
+                        <path d="M -1.1 -152.5 L -0.55 -202 L 0 -210 L 0.55 -202 L 1.1 -152.5 Z" fill="url(#bluedSteel)" />
+                      </g>
+
+                      <!-- Central Brass Pinion & Rivet -->
+                      <circle cx="0" cy="0" r="8.5" fill="url(#brassCap)" stroke="#4f3709" stroke-width="0.7" />
+                      <circle cx="0" cy="0" r="2.8" fill="#3a2808" />
+                      <circle cx="-1" cy="-1" r="1" fill="#f7e3a1" opacity="0.8" />
+                    </g>
+                  </svg>
+
+                  <!-- Domed Hesalite Acrylic Crystal Glare Overlay -->
+                  <div class="crystal-dome" aria-hidden="true"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tactile Bakelite Control Console -->
+        <div class="control-plinth" role="group" aria-label="Stopwatch Controls">
+          <button type="button" id="btn-start-stop" class="bakelite-btn bakelite-btn--primary">
+            <span class="btn-cap">
+              <span class="btn-label" id="btn-start-stop-label">START</span>
+              <span class="btn-shortcut">SPACE</span>
+            </span>
+          </button>
+
+          <button type="button" id="btn-lap" class="bakelite-btn bakelite-btn--amber" disabled>
+            <span class="btn-cap">
+              <span class="btn-label">LAP / SPLIT</span>
+              <span class="btn-shortcut">KEY L</span>
+            </span>
+          </button>
+
+          <button type="button" id="btn-reset" class="bakelite-btn bakelite-btn--dark" disabled>
+            <span class="btn-cap">
+              <span class="btn-label">RESET</span>
+              <span class="btn-shortcut">KEY R</span>
+            </span>
+          </button>
+
+          <button
+            type="button"
+            id="btn-sound"
+            class="bakelite-btn bakelite-btn--toggle"
+            aria-pressed="true"
+            title="Toggle mechanical escapement &amp; pusher sound (Key M)"
+          >
+            <span class="btn-cap">
+              <span class="btn-led" id="sound-indicator" aria-hidden="true"></span>
+              <span class="btn-label" id="btn-sound-label">TICKS ON</span>
+              <span class="btn-shortcut">KEY M</span>
+            </span>
+          </button>
+        </div>
+      </section>
+
+      <!-- Right Column: 1940s Timekeeper's Clipboard Ledger -->
+      <aside class="ledger-stage" aria-label="Timekeeper's Lap Record Sheet">
+        <div class="clipboard">
+          <div class="clipboard-clip" aria-hidden="true">
+            <div class="clip-lever"></div>
+          </div>
+
+          <div class="ledger-sheet">
+            <div class="ledger-header">
+              <div class="ledger-title-row">
+                <div>
+                  <p class="ledger-form-id">FORM NO. 44-B • OFFICIAL CHRONOMETRY</p>
+                  <h2 class="ledger-heading">TIMEKEEPER’S LOG</h2>
+                </div>
+                <div class="status-stamp" id="status-stamp" data-state="idle">AT REST</div>
+              </div>
+
+              <!-- Stamped Typewriter Readouts -->
+              <div class="readout-grid">
+                <div class="readout-cell">
+                  <span class="readout-caption">TOTAL ELAPSED</span>
+                  <output id="display-total" class="readout-value" aria-live="off">00:00.00</output>
+                </div>
+                <div class="readout-cell readout-cell--split">
+                  <span class="readout-caption">CURRENT LAP</span>
+                  <output id="display-current-lap" class="readout-value readout-value--crimson" aria-live="off">00:00.00</output>
+                </div>
+              </div>
+            </div>
+
+            <!-- Rattrapante Hand Legend -->
+            <div class="rattrapante-note" id="rattrapante-status">
+              <span class="legend-swatch legend-swatch--crimson" aria-hidden="true"></span>
+              <span id="rattrapante-status-text">Crimson hand sweeps in lockstep until first split.</span>
+            </div>
+
+            <!-- Lap Table -->
+            <div class="ledger-table-wrap">
+              <table class="ledger-table" aria-label="Recorded Laps">
+                <thead>
+                  <tr>
+                    <th scope="col">LAP</th>
+                    <th scope="col">SPLIT TIME</th>
+                    <th scope="col">CUMULATIVE</th>
+                    <th scope="col">MARK</th>
+                  </tr>
+                </thead>
+                <tbody id="lap-list">
+                  <tr class="empty-ledger-row" id="empty-row">
+                    <td colspan="4">
+                      Press <strong>LAP / SPLIT</strong> (or left watch pusher) while running to record splits.
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <footer class="ledger-footer">
+              <span id="lap-summary">0 SPLITS RECORDED</span>
+              <span class="ephemeral-stamp">UNPERSISTED • CLEARS ON RELOAD</span>
+            </footer>
+          </div>
+        </div>
+      </aside>
+    </main>
+  </div>
+
+  <script src="./audio.js"></script>
+  <script src="./dial.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
